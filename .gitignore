@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+logs
+
+# package-lock.json (use yarn.lock instead)
+package-lock.json
+
+# yarn error logs
+yarn-error.log
+
+# Http logs
+access.log
+
+# Environment varibales
+.env*
+!.env*.example
+
+# Code coverage
+coverage
+
+src/access.log
+
+.vscode
+
+src/logs
