@@ -6,6 +6,7 @@ const feedByStorageController = require('../controllers/feedByStorage.controller
 
 
 
+
 router.get('/welcome', welcomeController.get);
 
 router.get('/watch', feedByStorageController.watch);
@@ -44,7 +45,7 @@ router.get('/initailizeMaps', feedByStorageController.initailizeMaps);
 
 setTimeout(function () {
     // initialising all map on server startup
-    request('http://localhost:9638/spicescreen/advertisement/initailizeMaps?initialize=true', function (error, response, body) {
+    request('http://localhost:'+port+'/spicescreen/advertisement/initailizeMaps?initialize=true', function (error, response, body) {
         if (!error) {
             console.log(response.body)
         }

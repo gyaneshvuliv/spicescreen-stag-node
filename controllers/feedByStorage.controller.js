@@ -30,81 +30,81 @@ let contentMap = new Map();
 module.exports.initailizeMaps = async function initailizeMaps(req, res) {
 
     try {
-        request('http://localhost:9638/spicescreen/advertisement/watch?initialize=true', function (error, response, body) {
+         request('http://localhost:'+port+'/spicescreen/advertisement/watch?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
 
-        request('http://localhost:9638/spicescreen/advertisement/ad?initialize=true', function (error, response, body) {
+         request('http://localhost:'+port+'/spicescreen/advertisement/ad?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:9638/spicescreen/advertisement/ad-web?initialize=true', function (error, response, body) {
+         request('http://localhost:'+port+'/spicescreen/advertisement/ad-web?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:9638/spicescreen/advertisement/read?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-
-        request('http://localhost:9638/spicescreen/advertisement/travel?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-        request('http://localhost:9638/spicescreen/advertisement/store?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-        request('http://localhost:9638/spicescreen/advertisement/mall?initialize=true', function (error, response, body) {
+         request('http://localhost:'+port+'/spicescreen/advertisement/read?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
 
-        request('http://localhost:9638/spicescreen/advertisement/fnb?initialize=true', function (error, response, body) {
+         request('http://localhost:'+port+'/spicescreen/advertisement/travel?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:9638/spicescreen/advertisement/service?initialize=true', function (error, response, body) {
+         request('http://localhost:'+port+'/spicescreen/advertisement/store?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:9638/spicescreen/advertisement/livestream?initialize=true', function (error, response, body) {
+         request('http://localhost:'+port+'/spicescreen/advertisement/mall?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:9638/spicescreen/advertisement/multiPlayerGame?initialize=true', function (error, response, body) {
+
+         request('http://localhost:'+port+'/spicescreen/advertisement/fnb?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:9638/spicescreen/advertisement/longcode?initialize=true', function (error, response, body) {
+         request('http://localhost:'+port+'/spicescreen/advertisement/service?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
-        request('http://localhost:9638/spicescreen/advertisement/landingPage?initialize=true', function (error, response, body) {
+
+         request('http://localhost:'+port+'/spicescreen/advertisement/livestream?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+
+         request('http://localhost:'+port+'/spicescreen/advertisement/multiPlayerGame?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+
+         request('http://localhost:'+port+'/spicescreen/advertisement/longcode?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+         request('http://localhost:'+port+'/spicescreen/advertisement/landingPage?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
