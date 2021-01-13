@@ -1778,7 +1778,7 @@ module.exports.pollAndSend = async function pollAndSend(req, res) {
                     if (!error) {
                         console.log(response.body)
                         let update = "update miss_call_logs set isSent=1 where id=" + element.id
-                        await mysql.sequelize.query(update, { type: QueryTypes.SELECT });
+                        await mysql.sequelize.query(update, { type: QueryTypes.update });
                     }else{
                         console.log(error)
                     }
