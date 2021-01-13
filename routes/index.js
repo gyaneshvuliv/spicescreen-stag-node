@@ -4,8 +4,7 @@ var request = require('request')
 const welcomeController = require('../controllers/welcome.controller.js');
 const feedByStorageController = require('../controllers/feedByStorage.controller.js');
 
-
-
+const registrationController = require('../controllers/registration.controller.js');
 
 router.get('/welcome', welcomeController.get);
 
@@ -41,7 +40,11 @@ router.get('/feedByStorage', feedByStorageController.feedByStorage);
 
 router.get('/jsonUpdate', feedByStorageController.feedByStorage);
 
+router.get('/pollAndSend', feedByStorageController.pollAndSend);
+
 router.get('/initailizeMaps', feedByStorageController.initailizeMaps);
+
+router.post('/vuscreen/registration', registrationController.register);
 
 setTimeout(function () {
     // initialising all map on server startup

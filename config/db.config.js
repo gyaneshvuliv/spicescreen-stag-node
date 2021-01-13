@@ -2,7 +2,7 @@ module.exports = {
   HOST: "3.7.31.207",
   USER: "root",
   PASSWORD: "RBI@M0ve@1980",
-  DB: "spicescreen_web",
+  DB: "spicescreen",
   dialect: "mariadb",
   pool: {
     max: 5,

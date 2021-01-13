@@ -1,6 +1,6 @@
 {
   "name": "spicescreen-node",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node app.js"
@@ -22,7 +22,7 @@
     "mysql2": "^2.2.5",
     "performance-now": "^2.1.0",
     "request": "^2.88.2",
-    "sequelize": "^6.3.5",
+    "sequelize": "6.3.5",
     "winston": "^3.3.3"
   }
 }

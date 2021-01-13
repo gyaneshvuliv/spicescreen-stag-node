@@ -112,7 +112,7 @@ const logger = winston.createLogger({
 });
 global.logger = logger;
 logger.detach = (level, msg) => {
-  logger[level](msg)
+  // logger[level](msg)
 }
 
 var http = require('http');

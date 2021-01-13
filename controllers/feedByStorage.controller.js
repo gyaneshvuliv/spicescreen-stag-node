@@ -30,81 +30,81 @@ let contentMap = new Map();
 module.exports.initailizeMaps = async function initailizeMaps(req, res) {
 
     try {
-         request('http://localhost:'+port+'/spicescreen/advertisement/watch?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + '/spicescreen/advertisement/watch?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
 
-         request('http://localhost:'+port+'/spicescreen/advertisement/ad?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + '/spicescreen/advertisement/ad?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-         request('http://localhost:'+port+'/spicescreen/advertisement/ad-web?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + '/spicescreen/advertisement/ad-web?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-         request('http://localhost:'+port+'/spicescreen/advertisement/read?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-
-         request('http://localhost:'+port+'/spicescreen/advertisement/travel?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-         request('http://localhost:'+port+'/spicescreen/advertisement/store?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-         request('http://localhost:'+port+'/spicescreen/advertisement/mall?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + '/spicescreen/advertisement/read?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
 
-         request('http://localhost:'+port+'/spicescreen/advertisement/fnb?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + '/spicescreen/advertisement/travel?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-         request('http://localhost:'+port+'/spicescreen/advertisement/service?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + '/spicescreen/advertisement/store?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-         request('http://localhost:'+port+'/spicescreen/advertisement/livestream?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + '/spicescreen/advertisement/mall?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-         request('http://localhost:'+port+'/spicescreen/advertisement/multiPlayerGame?initialize=true', function (error, response, body) {
+
+        request('http://localhost:' + port + '/spicescreen/advertisement/fnb?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-         request('http://localhost:'+port+'/spicescreen/advertisement/longcode?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + '/spicescreen/advertisement/service?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
-         request('http://localhost:'+port+'/spicescreen/advertisement/landingPage?initialize=true', function (error, response, body) {
+
+        request('http://localhost:' + port + '/spicescreen/advertisement/livestream?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+
+        request('http://localhost:' + port + '/spicescreen/advertisement/multiPlayerGame?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+
+        request('http://localhost:' + port + '/spicescreen/advertisement/longcode?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+        request('http://localhost:' + port + '/spicescreen/advertisement/landingPage?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
@@ -1742,5 +1742,56 @@ module.exports.landingPage = async function landingPage(req, res) {
         logEntry.stackTrace = error.toString();
         logEntry.response = returnObj
         logger.detach("info", logEntry);
+    }
+}
+
+
+module.exports.pollAndSend = async function pollAndSend(req, res) {
+    const returnObj = newResponseObject.generateResponseObject({
+        code: httpStatus.OK,
+        success: false
+    });
+    res.status(returnObj.code).send(returnObj);
+    let startTime = now();
+    let logEntry = {
+        operationName: "feedByStorage.pollAndSend",
+        startTime: new Date(),
+        request: req.query,
+        requestUrl: req.url,
+    }
+    try {
+        logEntry.message = "Request received"
+        logger.detach("info", logEntry);
+        let sql = "SELECT * FROM miss_call_logs where isSent=0";
+        const resultSet = await mysql.sequelize.query(sql, { type: QueryTypes.SELECT });
+        for (let index = 0; index < resultSet.length; index++) {
+            const element = resultSet[index];
+            try {
+                console.log(element)
+                let MOBILE_NUMBER = element.customer_number;
+                let SMS = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='KNOWLARITY_SMS'", { type: QueryTypes.SELECT })
+                let url = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='KNOWLARITY_URL'", { type: QueryTypes.SELECT })
+                url = url[0].conf_value.replace("{SMS}", SMS[0].conf_value)
+                url = url.replace("{MOBILE_NUMBER}", MOBILE_NUMBER);
+                console.log(url)
+                request(url, async function (error, response, body) {
+                    if (!error) {
+                        console.log(response.body)
+                        let update = "update miss_call_logs set isSent=1 where id=" + element.id
+                        await mysql.sequelize.query(update, { type: QueryTypes.SELECT });
+                    }else{
+                        console.log(error)
+                    }
+                   
+                })
+
+            } catch (error) {
+                console.log(error)
+
+            }
+
+        }
+    } catch (error) {
+        console.log(error)
     }
 }
