@@ -21,8 +21,6 @@ global.feedByStorageLivestream = {}
 global.feedByStorageMultiPlayerGame = {}
 global.feedByStorageLongCode = {}
 global.feedByStorageLandingPage = {}
-
-
 let InsertWatchContentDetails = new Map();
 let contentMap = new Map();
 
@@ -30,81 +28,81 @@ let contentMap = new Map();
 module.exports.initailizeMaps = async function initailizeMaps(req, res) {
 
     try {
-        request('http://localhost:' + port + '/spicescreen/advertisement/watch?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + subUrl + '/watch?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
 
-        request('http://localhost:' + port + '/spicescreen/advertisement/ad?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + subUrl + '/ad?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:' + port + '/spicescreen/advertisement/ad-web?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + subUrl + '/ad-web?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:' + port + '/spicescreen/advertisement/read?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-
-        request('http://localhost:' + port + '/spicescreen/advertisement/travel?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-        request('http://localhost:' + port + '/spicescreen/advertisement/store?initialize=true', function (error, response, body) {
-            if (!error) {
-                // console.log(response.body)
-            }
-        })
-
-        request('http://localhost:' + port + '/spicescreen/advertisement/mall?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + subUrl + '/read?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
 
-        request('http://localhost:' + port + '/spicescreen/advertisement/fnb?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + subUrl + '/travel?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:' + port + '/spicescreen/advertisement/service?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + subUrl + '/store?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:' + port + '/spicescreen/advertisement/livestream?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + subUrl + '/mall?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:' + port + '/spicescreen/advertisement/multiPlayerGame?initialize=true', function (error, response, body) {
+
+        request('http://localhost:' + port + subUrl + '/fnb?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
 
-        request('http://localhost:' + port + '/spicescreen/advertisement/longcode?initialize=true', function (error, response, body) {
+        request('http://localhost:' + port + subUrl + '/service?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
         })
-        request('http://localhost:' + port + '/spicescreen/advertisement/landingPage?initialize=true', function (error, response, body) {
+
+        request('http://localhost:' + port + subUrl + '/livestream?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+
+        request('http://localhost:' + port + subUrl + '/multiPlayerGame?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+
+        request('http://localhost:' + port + subUrl + '/longcode?initialize=true', function (error, response, body) {
+            if (!error) {
+                // console.log(response.body)
+            }
+        })
+        request('http://localhost:' + port + subUrl + '/landingPage?initialize=true', function (error, response, body) {
             if (!error) {
                 // console.log(response.body)
             }
@@ -192,8 +190,8 @@ module.exports.watch = async function watch(req, res) {
         if (req.query.initialize == true || req.query.initialize == "true") {
             InsertWatchContentDetails = new Map();
             await insertDuplicateContentInWatchSection();
-            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
-            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
+            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
+            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
             let CATEGORY = dbCat[0].conf_value.split(",")  //[1, 2, 7, 6]
             let FOLDER = dbFolder[0].conf_value.split(",") // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
 
@@ -352,7 +350,7 @@ async function insertDuplicateContentInWatchSection() {
     try {
         logEntry.message = "Request received"
         logger.detach("info", logEntry);
-        const resultSet = await mysql.sequelize.query("SELECT id,folder_id,content_id,position FROM spicescreen.vuscreen_extra_content", { type: QueryTypes.SELECT });
+        const resultSet = await mysql.sequelize.query("SELECT id,folder_id,content_id,position FROM vuscreen_extra_content", { type: QueryTypes.SELECT });
         let endTime = now() - startTime;
         logEntry.message = "Query executed succesfully"
         logEntry.elapsedTime = endTime
@@ -629,8 +627,8 @@ module.exports.read = async function read(req, res) {
         logEntry.message = "Request received"
         logger.detach("info", logEntry);
         if (req.query.initialize == true || req.query.initialize == "true") {
-            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='READ_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
-            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='READ_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
+            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='READ_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
+            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='READ_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
             let CATEGORY = dbCat[0].conf_value.split(",")
             let FOLDER = dbFolder[0].conf_value.split(",")
 
@@ -762,8 +760,8 @@ module.exports.travel = async function travel(req, res) {
         logEntry.message = "Request received"
         logger.detach("info", logEntry);
         if (req.query.initialize == true || req.query.initialize == "true") {
-            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='TRAVEL_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
-            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='TRAVEL_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
+            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='TRAVEL_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
+            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='TRAVEL_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
             let CATEGORY = dbCat[0].conf_value.split(",")
             let FOLDER = dbFolder[0].conf_value.split(",")
 
@@ -900,8 +898,8 @@ module.exports.store = async function store(req, res) {
         logEntry.message = "Request received"
         logger.detach("info", logEntry);
         if (req.query.initialize == true || req.query.initialize == "true") {
-            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='STORE_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
-            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='STORE_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
+            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='STORE_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
+            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='STORE_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
             let CATEGORY = dbCat[0].conf_value.split(",")
             let FOLDER = dbFolder[0].conf_value.split(",")
 
@@ -1039,8 +1037,8 @@ module.exports.mall = async function mall(req, res) {
         logEntry.message = "Request received"
         logger.detach("info", logEntry);
         if (req.query.initialize == true || req.query.initialize == "true") {
-            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='MALL_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
-            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='MALL_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
+            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='MALL_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
+            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='MALL_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
             let CATEGORY = dbCat[0].conf_value.split(",")
             let FOLDER = dbFolder[0].conf_value.split(",")
 
@@ -1178,8 +1176,8 @@ module.exports.fnb = async function fnb(req, res) {
         logEntry.message = "Request received"
         logger.detach("info", logEntry);
         if (req.query.initialize == true || req.query.initialize == "true") {
-            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='FNB_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
-            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM spicescreen.server_configurations where conf_key='FNB_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
+            let dbCat = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='FNB_CATEGORY_ID'", { type: QueryTypes.SELECT })  //[1, 2, 7, 6]
+            let dbFolder = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='FNB_FOLDER_ID'", { type: QueryTypes.SELECT }) // [1, 3, 11, 12, 13, 20, 22, 23, 25, 26, 27, 28, 30, 31, 32, 33, 35, 36, 51, 52, 55, 56, 57, 54, 109, 207, 58, 59]
             let CATEGORY = dbCat[0].conf_value.split(",")
             let FOLDER = dbFolder[0].conf_value.split(",")
 

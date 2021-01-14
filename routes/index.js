@@ -54,7 +54,7 @@ router.post('/vuscreen/spicejetTrack', trackerController.spiceTrack);
 
 setTimeout(function () {
     // initialising all map on server startup
-    request('http://localhost:'+port+'/spicescreen/advertisement/initailizeMaps?initialize=true', function (error, response, body) {
+    request('http://localhost:' + port + subUrl + '/initailizeMaps?initialize=true', function (error, response, body) {
         if (!error) {
             console.log(response.body)
         }

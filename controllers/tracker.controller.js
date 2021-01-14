@@ -12,7 +12,6 @@ const crypto = require('crypto');
 const moment = require('moment');
 const { type } = require('os');
 
-
 module.exports.spiceTrack = async function spiceTrack(req, res) {
     let startTime = now();
     let logEntry = {

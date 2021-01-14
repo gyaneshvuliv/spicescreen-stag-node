@@ -49,12 +49,14 @@ app.use(useragent.express());
 app.get('/', (req, res) => {
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT Voila' });
 });
+
+global.subUrl = '/spicescreen/advertisement'
 // v1 api routes
-app.use('/spicescreen/advertisement', routes);
+app.use(subUrl, routes);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
-  res.status(500).send({status:500,error: "API not found"});
+  res.status(500).send({ status: 500, error: "API not found" });
 });
 
 
@@ -112,7 +114,7 @@ const logger = winston.createLogger({
 });
 global.logger = logger;
 logger.detach = (level, msg) => {
-  // logger[level](msg)
+  logger[level](msg)
 }
 
 var http = require('http');

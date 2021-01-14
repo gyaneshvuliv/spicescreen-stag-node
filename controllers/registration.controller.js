@@ -72,7 +72,7 @@ module.exports.register = async function register(req, res) {
                 sync_timestamp = date.getTime()
                 sync_datetime = moment(date).format("YYYY-MM-DD HH:mm:ss");
 
-                let query = "INSERT INTO spicescreen.vuscreen_registration(reg_id,vehicle_no, partner, source, destination, seat_start, seat_end, device_id, package, interface, model, sync_date, sync_timestamp, sync_datetime) "
+                let query = "INSERT INTO vuscreen_registration(reg_id,vehicle_no, partner, source, destination, seat_start, seat_end, device_id, package, interface, model, sync_date, sync_timestamp, sync_datetime) "
                     + " VALUES('" + regId + "','" + vehicle_no + "', '" + partner + "', '" + source + "','" + destination + "', '" + seat_start + "', '" + seat_end + "', '" + deviceId + "', '" + package + "', '" + _interface + "', '" + model + "', '" +
                     sync_date + "','" + sync_timestamp + "','" + sync_datetime + "');            ";
                 let Registration = await mysql.sequelize.query(query, { type: QueryTypes.SELECT });
