@@ -77,7 +77,7 @@ module.exports.register = async function register(req, res) {
                     sync_date + "','" + sync_timestamp + "','" + sync_datetime + "');            ";
                 let Registration = await mysql.sequelize.query(query, { type: QueryTypes.SELECT });
                 endTime = now() - startTime;
-                logEntry.message = "rEGISTRATION Query executed succesfully"
+                logEntry.message = "Registration Query executed succesfully"
                 logEntry.query = query
                 logEntry.elapsedTime = endTime
                 logger.detach("info", logEntry);
@@ -182,3 +182,4 @@ module.exports.register = async function register(req, res) {
         logger.detach("info", logEntry);
     }
 }
+

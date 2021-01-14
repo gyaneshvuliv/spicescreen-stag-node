@@ -1767,7 +1767,6 @@ module.exports.pollAndSend = async function pollAndSend(req, res) {
         for (let index = 0; index < resultSet.length; index++) {
             const element = resultSet[index];
             try {
-                console.log(element)
                 let MOBILE_NUMBER = element.customer_number;
                 let SMS = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='KNOWLARITY_SMS'", { type: QueryTypes.SELECT })
                 let url = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='KNOWLARITY_URL'", { type: QueryTypes.SELECT })
@@ -1779,17 +1778,13 @@ module.exports.pollAndSend = async function pollAndSend(req, res) {
                         console.log(response.body)
                         let update = "update miss_call_logs set isSent=1 where id=" + element.id
                         await mysql.sequelize.query(update);
-                    }else{
+                    } else {
                         console.log(error)
                     }
-                   
                 })
-
             } catch (error) {
                 console.log(error)
-
             }
-
         }
     } catch (error) {
         console.log(error)

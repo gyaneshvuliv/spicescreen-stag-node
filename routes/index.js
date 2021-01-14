@@ -3,8 +3,9 @@ const router = express.Router();
 var request = require('request')
 const welcomeController = require('../controllers/welcome.controller.js');
 const feedByStorageController = require('../controllers/feedByStorage.controller.js');
-
 const registrationController = require('../controllers/registration.controller.js');
+const trackerController = require('../controllers/tracker.controller.js');
+
 
 router.get('/welcome', welcomeController.get);
 
@@ -45,6 +46,11 @@ router.get('/pollAndSend', feedByStorageController.pollAndSend);
 router.get('/initailizeMaps', feedByStorageController.initailizeMaps);
 
 router.post('/vuscreen/registration', registrationController.register);
+
+router.post('/vuscreen/spicejetTrack', trackerController.spiceTrack);
+
+
+
 
 setTimeout(function () {
     // initialising all map on server startup
