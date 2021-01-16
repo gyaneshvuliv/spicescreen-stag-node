@@ -21,6 +21,8 @@ global.feedByStorageLivestream = {}
 global.feedByStorageMultiPlayerGame = {}
 global.feedByStorageLongCode = {}
 global.feedByStorageLandingPage = {}
+
+
 let InsertWatchContentDetails = new Map();
 let contentMap = new Map();
 
@@ -172,9 +174,6 @@ module.exports.feedByStorage = async function feedByStorage(req, res) {
     // logEntry.response = returnObj
     logger.detach("info", logEntry);
 }
-
-
-
 
 module.exports.watch = async function watch(req, res) {
     let startTime = now();

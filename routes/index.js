@@ -43,13 +43,27 @@ router.get('/jsonUpdate', feedByStorageController.feedByStorage);
 
 router.get('/pollAndSend', feedByStorageController.pollAndSend);
 
+router.get('/appUpdate', trackerController.appUpdate);
+
+router.post('/appUpgrade', trackerController.appUpgrade);
+
+router.get('/getCityList', trackerController.getCityList);
+
 router.get('/initailizeMaps', feedByStorageController.initailizeMaps);
 
 router.post('/vuscreen/registration', registrationController.register);
 
 router.post('/vuscreen/spicejetTrack', trackerController.spiceTrack);
 
+router.post('/vuscreen/spicejetEvent', trackerController.spiceEvent);
 
+router.post('/vuscreen/postTambola', trackerController.postTambola);
+
+router.post('/vuscreen/registerClubMember', trackerController.registerClubMember);
+
+router.post('/vuscreen/deviceUpdate', trackerController.deviceUpdate);
+
+router.post('/missCalllogs', trackerController.missCalllogs);
 
 
 setTimeout(function () {
