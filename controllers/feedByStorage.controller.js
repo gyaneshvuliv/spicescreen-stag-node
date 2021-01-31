@@ -1804,11 +1804,11 @@ module.exports.sendAlert = async function sendAlert(req, res) {
     try {
         logEntry.message = "Request received"
         logger.detach("info", logEntry);
-        const resultSet = ["9599962318", "7879692393"]
+        const resultSet = ["+919599962318", "+917879692393"]
         for (let index = 0; index < resultSet.length; index++) {
             const element = resultSet[index];
             try {
-                let MOBILE_NUMBER = element.customer_number;
+                let MOBILE_NUMBER = element;
                 let url = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='KNOWLARITY_URL'", { type: QueryTypes.SELECT })
                 if (req.query.key == "CPU" || req.query.key == "RAM" || req.query.key == "DISK") {
                     url = url[0].conf_value.replace("{SMS}", "On Server : " + req.query.server + " | " + req.query.key + " | usage is : " + req.query.value)
