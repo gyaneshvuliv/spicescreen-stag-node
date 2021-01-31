@@ -1804,7 +1804,12 @@ module.exports.sendAlert = async function sendAlert(req, res) {
     try {
         logEntry.message = "Request received"
         logger.detach("info", logEntry);
-        const resultSet = ["+919599962318", "+917879692393"]
+        // const resultSet = [+919599962318, +917879692393,+919650379456,+919810772396]
+        let resultSet = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='ALERT_CONTACT'", { type: QueryTypes.SELECT })
+
+        resultSet = resultSet[0].conf_value.split(",")
+        console.log(resultSet)
+
         for (let index = 0; index < resultSet.length; index++) {
             const element = resultSet[index];
             try {
