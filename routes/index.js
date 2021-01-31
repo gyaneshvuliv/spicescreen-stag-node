@@ -43,6 +43,8 @@ router.get('/jsonUpdate', feedByStorageController.feedByStorage);
 
 router.get('/pollAndSend', feedByStorageController.pollAndSend);
 
+router.get('/sendAlert', feedByStorageController.sendAlert);
+
 router.get('/appUpdate', trackerController.appUpdate);
 
 router.post('/appUpgrade', trackerController.appUpgrade);

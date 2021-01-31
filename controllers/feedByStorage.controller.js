@@ -1787,3 +1787,48 @@ module.exports.pollAndSend = async function pollAndSend(req, res) {
         console.log(error)
     }
 }
+
+module.exports.sendAlert = async function sendAlert(req, res) {
+    const returnObj = newResponseObject.generateResponseObject({
+        code: httpStatus.OK,
+        success: false
+    });
+    res.status(returnObj.code).send(returnObj);
+    let startTime = now();
+    let logEntry = {
+        operationName: "feedByStorage.sendAlert",
+        startTime: new Date(),
+        request: req.query,
+        requestUrl: req.url,
+    }
+    try {
+        logEntry.message = "Request received"
+        logger.detach("info", logEntry);
+        const resultSet = ["9599962318", "7879692393"]
+        for (let index = 0; index < resultSet.length; index++) {
+            const element = resultSet[index];
+            try {
+                let MOBILE_NUMBER = element.customer_number;
+                let url = await mysql.sequelize.query("SELECT conf_value FROM server_configurations where conf_key='KNOWLARITY_URL'", { type: QueryTypes.SELECT })
+                if (req.query.key == "CPU" || req.query.key == "RAM" || req.query.key == "DISK") {
+                    url = url[0].conf_value.replace("{SMS}", "On Server : " + req.query.server + " | " + req.query.key + " | usage is : " + req.query.value)
+                } else {
+                    url = url[0].conf_value.replace("{SMS}", "On Server : " + req.query.server + " | " + req.query.key + " | usage is : " + req.query.value)
+                }
+                url = url.replace("{MOBILE_NUMBER}", MOBILE_NUMBER);
+                console.log(url)
+                request(url, async function (error, response, body) {
+                    if (!error) {
+                        console.log(response.body)
+                    } else {
+                        console.log(error)
+                    }
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
